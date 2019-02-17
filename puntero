@@ -1,0 +1,29 @@
+//Elmer Gustavo Gonzalez Gonzalez
+// GG18040
+
+//este programa muestra la inversa de una linea de caracteres
+#include<iostream>
+#include<stdlib.h>
+#include<conio.h>
+#include<stdio.h>
+
+using namespace std;
+
+int main(){
+
+//las variables son de tipo char por si el usuario dijita numeros o letras
+char cantidad[8];
+char *puntero;
+
+//se le pide al usuario que digite una cantidad de caracteres menor a 8
+cout <<"ingrese una cantidad de caracteres no mas de 8: "<<endl;
+cin>>cantidad;
+
+//este siclo es para ordenar los caracteres ingresados por el usuario
+for (int i=8; i>=0; i--) {
+	puntero=&cantidad[i];
+	cout<<" "<< *puntero;
+}
+
+getch();
+}
