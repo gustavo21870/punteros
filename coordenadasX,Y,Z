@@ -1,0 +1,82 @@
+//Elmer Gustavo Gonzalez Gonzalez
+//GG18040
+
+#include <iostream>
+#include <string>
+#include <queue>
+#include <conio.h>
+#include <windows.h>
+using namespace std;
+
+struct coordenadas{
+        int x;
+        int y;
+        int z;
+    };
+    
+
+int main()
+{
+     
+	queue<coordenadas> cola;		
+	coordenadas *ptr;		
+	int op;		
+	int i;
+	do{						
+	
+	cout<<"ELEGIR OPCION "<<endl;
+	
+	cout<<"1. Agregar "<<endl;
+	cout<<"2. Mostrar "<<endl;
+	cout<<"3. Promedio"<<endl;
+	cout<<"4. Salir"<<endl;
+	cout<<"";cin>>op;
+	
+	switch (op){
+				case 1: 
+						coordenadas aux;		
+		            	cout<<"	Ingrese valor de x: ";
+						cin>>aux.x;
+		            	cout<<"	Ingrese valor de y: ";
+						cin>>aux.y;
+						cout<<"	Ingrese valor de z: ";
+		            	cin>>aux.z;
+				        cola.push(aux);		
+				     
+				    
+		        		break;
+		        case 2:
+		                ptr=&cola.front();
+						for(int i=0; i<cola.size(); i++){
+						coordenadas auxi;			
+        		 		auxi=*ptr;
+		        		cout<<"	x: "<<auxi.x <<endl;
+		        		cout<<"	y: "<<auxi.y <<" ";
+		        		cout<<" z: "<<auxi.z <<" "<<endl;
+		        		ptr++;				
+        				}
+        			
+						break;
+                case 3: ptr=&cola.front();
+        				float xx;
+        				float ys;
+        				int zz;
+        				coordenadas auxi;
+        				ptr = &cola.front();
+						for(i=0; i<cola.size(); i++){		
+									
+        		 		auxi=*ptr;
+		        		xx=xx+auxi.x;
+		        		ys=ys+auxi.y;
+		        		zz=zz+auxi.z;
+		        		ptr++;					
+        				}
+        				cout<<" promedio x: "<<(xx/i) <<endl;
+        				cout<<" promedio y: "<<(ys/i) <<endl;
+        				cout<<" promedio z: "<<(zz/i) <<endl;
+        			
+				case 4: break;
+					}
+	} while (op != 4);
+	return 0;
+}
