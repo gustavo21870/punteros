@@ -1,0 +1,160 @@
+//Elmer Gustavo Gonzalez Gonzalez
+//GG18040
+
+#include <iostream>
+#include <string>
+#include <queue>
+#include <windows.h>
+#include <conio.h>
+
+using namespace std;
+
+class Paciente{
+	private:
+	class Nodo{
+	public:
+    	    int correlativo;
+    	    char nombre[20];
+    	    char apellido[20];
+			int edad;
+			char sexo[2]; 
+			int peso;
+			char enfermedad[50];
+			 Nodo *sig;
+		
+	};
+    
+ Nodo *raiz;
+ 
+    public:
+    	  Paciente();
+    	  ~Paciente();
+    	  void Agregar();
+    	  void Mostrar();
+    	  void Buscar();
+    	  
+    	
+};
+
+Paciente::Paciente()
+{
+    raiz = NULL;
+}
+Paciente::~Paciente()
+{
+
+}
+
+void Paciente::Mostrar(){
+    Nodo *reco = raiz;
+    cout << "HISTORIAL CLINICO\n";
+    while (reco != NULL){
+        cout <<" NUMERO DE CORRELATIVO: " <<reco->correlativo<<endl;
+        cout <<" NOMBRER: "<< reco->nombre <<endl;
+        cout <<"APELLIDO: "<< reco->apellido << endl;
+        cout <<"EDAD: "<< reco->edad << endl;
+        cout <<"SEXO: "<< reco->sexo << endl;
+        cout <<"PESO: "<< reco->peso << endl;
+        cout <<"EMFERMEDAD: "<< reco->enfermedad << endl;
+        reco = reco->sig;
+    }
+    cout << "\n";
+}
+
+
+void Paciente::Agregar()
+{
+	
+	 Nodo *nuevo;
+    nuevo = new Nodo();
+    cout<<"ingrese correlativo:";
+    cin>>nuevo->correlativo;
+    cout<<"ingrese nombre:";
+    cin>>nuevo->nombre;
+    cout<<"ingrese apellido:";
+    cin>>nuevo->apellido;
+    cout<<"ingrese edad:";
+    cin>>nuevo->edad;
+    cout<<"ingrese sexo:";
+    cin>>nuevo->sexo;
+    cout<<"ingrese peso en numeros:";
+    cin>>nuevo->peso;
+    cout<<"ingrese enfermedad:";
+    cin>>nuevo->enfermedad;
+    
+    if (raiz == NULL){
+        raiz = nuevo;
+        nuevo->sig = NULL;
+    }
+    else{
+        nuevo->sig = raiz;
+        raiz = nuevo;
+    }
+
+}
+
+void Paciente::Buscar(){
+	
+	
+	if (raiz != NULL){
+	
+		int buscardatos;
+	    cout<<"Ingrese numero de correlativo"<<endl;
+	    cin>>buscardatos;
+	    
+	    if(buscardatos == raiz->correlativo){ 
+	    	
+            cout<<"Encontrado, el elemento es: "<<raiz->correlativo<<endl;
+		}
+		else{
+		
+			cout<<"El elemento ingresado no esta en la cola"<<endl;
+		}
+	}
+	else{
+	
+		cout<<"La cola esta vacia...."<<endl;
+	}
+}
+
+int main() {
+	
+	Paciente *consulta;
+    consulta= new Paciente();
+    int opc;
+    
+    do{
+	    cout<<"\t\t\tCONSULTORIO "<<endl;
+	    cout<<"Ingrese una opcion."<<endl;
+       	cout<<" "<<endl;
+	
+        cout<<"1 - Agregar nuevo cliente."<<endl;
+        cout<<"2 - Mostrar datos del cliente"<<endl;
+        cout<<"3 - Buscar  cliente"<<endl;
+        cout<<"4 - Salir"<<endl;
+	    cin>>opc;
+	    
+	    switch(opc){
+	    	
+	    	case 1:
+        	     consulta->Agregar(); 
+	       	break;
+	    	
+	    	case 2:
+         	     	consulta->Mostrar();
+	    	break;
+	    	
+	    	case 3:
+	    		 consulta->Buscar();
+	    	break;
+	    	
+	    	case 4:
+	    	break;
+		}
+		system("pause");
+		system("cls");
+    }while(opc!=4);
+	
+	getch();
+	return 0;
+}
