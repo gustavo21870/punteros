@@ -1,0 +1,192 @@
+//clase viernes/Abril5
+
+#include <iostream>
+#include <windows.h>
+#include <math.h>
+using namespace std;
+
+class Figura{
+	
+	private: 
+			float base;
+			float altura;
+	public: 
+			Figura(){
+				this->base=0;
+				this->altura=0;
+			}
+			Figura(float b, float a) 
+			{
+				this->base=b;
+				this->altura=a;
+			}
+			void setbase(float b){
+				this->base=b;
+			}
+			float getbase(){
+				return this->base;
+			}
+			void setaltura(float a){
+				this->altura=a;
+			}
+			float getaltura(){
+				return this->altura;
+			}
+			virtual float area()=0;		
+			virtual float perimetro()=0;	
+};
+
+class Color{
+	public:
+			void Colorear(){
+				cout<<"estoy pintando"<<endl;
+			}
+};
+
+class Rectangulo:public Figura, public Color{  
+	public:
+		float area(){
+			return getbase()* getaltura();
+		}
+		float perimetro(){
+			return 2*getbase()+2*getaltura();
+		}
+	void ImprimirR(){
+		for(int i=0; i<getaltura(); i++){
+			cout<<endl;
+			for(int j=0; j<getbase(); j++){
+				cout<<"* ";
+			}
+		}
+		
+	}
+};
+
+class Cuadrado:public Figura{  
+	public:
+		float area(){
+			return getbase()*getbase();
+		}
+		float perimetro(){
+			return 4*getbase();
+		}
+	void ImprimirR(){
+		for(int i=0; i<getbase(); i++){
+			cout<<endl;
+			for(int j=0; j<getbase(); j++){
+				cout<<"* ";
+			}
+		}
+		
+	}
+};
+
+class Triangulo:public Figura{
+	private:
+		float lado1;
+		float lado2;
+	public:
+		
+		void setLado1(float l){
+			this->lado1 = l;
+		}
+		float getLado1(){
+			return this->lado1;
+		}
+		
+		void setLado2(float l){
+			this->lado2 = l;
+		}
+		float getLado2(){
+			return this->lado2;
+		}
+		
+		float area(){
+			float semi = (getbase() + getLado1() + getLado2())/2;
+			float area = sqrt(semi*(semi-lado1)*(semi-lado2)*(semi-getbase()));
+			return area;
+		}
+		
+		float perimetro(){
+			return (getLado1()+getbase()+getLado2());
+		}
+		
+		void imprimirR(){ 
+			cout << endl;
+			for(int i = 0; i < getbase(); i++){
+				int x = getbase()-i;
+				for(int j = 0; i >= j; j++){
+					
+						while(x != 0){
+							cout << " ";
+							x--;
+						}
+						cout << "* ";				
+				}
+				cout << endl;
+			}
+			
+		}
+		
+};
+
+
+class PrincipalT{
+	public:
+	PrincipalT(){
+		Triangulo *t= new Triangulo();
+		t->setbase(8);
+			t->setLado1(8);
+			t->setLado2(8);
+				cout<<endl;
+			cout<<"base: "<<t->getbase()<<"\nlado 1: " <<t->getLado1()<< "\nlado 2: "<< t->getLado2()<< endl;
+				cout<<endl;
+			cout<<"area: "<<  t->area()<<endl<<"perimetro: "<<t ->perimetro()<< endl; 
+			t->imprimirR();
+				cout<<endl;
+	}
+};
+
+class PrincipalR{
+	public:
+	PrincipalR(){
+		Rectangulo *r= new Rectangulo();
+		r->setbase(6);
+		r->setaltura(8);
+			cout<<endl;
+		cout<<"base: "<<r->getbase()<<"  "<<"altura: "<<r->getaltura()<<endl;
+			cout<<endl;
+		cout<<"Area: "<<r->area()<<endl;
+		cout<<"Perimetro: "<<r->perimetro()<<endl;
+		r->ImprimirR();
+			cout<<endl;
+	}
+
+};
+
+class PrincipalC{
+	public:
+	PrincipalC(){
+		Cuadrado *c= new Cuadrado();
+		c->setbase(8);
+		c->setaltura(8);
+			cout<<endl;
+		cout<<"base: "<<c->getbase()<<"   "<<"altura: "<<c->getaltura()<<endl;
+			cout<<endl;
+		cout<<"Area: "<<c->area()<<endl;
+		cout<<"Perimetro: "<<c->perimetro()<<endl;
+		c->ImprimirR();
+			cout<<endl;
+	}
+};
+
+int main() {
+	
+	PrincipalR *pro=new PrincipalR();
+	
+	PrincipalC *pr=new PrincipalC();
+	
+	PrincipalT *p=new PrincipalT();
+	system("pause");
+	return 0;
+}
